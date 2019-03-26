@@ -2,6 +2,7 @@ searchButton.addEventListener("click",function(){
   loading.style.display = "block";
   var inputValue = cityName.value.trim();
   if(inputValue.length == 0){
+    loading.style.display = "none";
     alert("Please Enter City Name");
   }else {
     var request = new XMLHttpRequest();
@@ -13,8 +14,8 @@ searchButton.addEventListener("click",function(){
     request.onreadystatechange = function(){
       if(request.readyState === 4 && request.status === 200){
         var data = JSON.parse(request.responseText);
-        console.log(data);
         var wheatherObject = new Weather(inputValue,data.weather[0].description);
+        console.log(wheatherObject);
         wheatherObject.Temparature = data.main.temp;
         var differentColor = (Math.random()*10).toFixed();
         showData(wheatherObject,differentColor);
